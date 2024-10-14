@@ -125,6 +125,7 @@ crackersLabel.addEventListener("mouseleave", () => { showExactAmount = false; })
 setInterval(() => { crackersPerSecond = 0; saveProgress(); }, 1000);
 setInterval(() => {
     crackersLabel.textContent = `${showExactAmount ? playerData.crackers : abbreviateNumber(playerData.crackers)} crackers`;
+    clickButton.style.rotate = `${Number(clickButton.style.rotate.replace("deg", "")) + 1}deg`;
     cpsLabel.textContent = `${crackersPerSecond}`;
     document.getElementById("timePlayed").textContent =  `${abbreviateNumber(Math.floor(playerData.gameStarted - Date.now() / 1000) * -1)} seconds`;
     // document.getElementById("exactAmount").textContent =  `${playerData.crackers}`;
