@@ -1,3 +1,14 @@
+function showInfo(name) {
+    switch (name) {
+        case "multiplier":
+            alert("The higher the multiplier level, the more crackers you get per click.");
+            break;
+        case "saltines":
+            alert("Saltines click for you every second. The more you have, the more they will click for you.");
+            break;
+    };
+};
+
 document.atoc = () => {
     const clickButton = document.getElementById("cracker");
     const muteButton = document.getElementById("toggleMute");
@@ -8,7 +19,10 @@ document.atoc = () => {
     const crackersLabel = document.getElementById("amount");
     const cpsLabel = document.getElementById("crackersPerSecond");
     const clickSoundPlayer = new Audio("assets/click.wav");
+    const upgradeSoundPlayer = new Audio("assets/upgrade.wav");
     const musicPlayer = new Audio("assets/music.wav");
+
+    const upgradeNames = ["multiplier", "saltines"];
 
     let userInteracted = false;
     let showExactAmount = false;
@@ -32,9 +46,12 @@ document.atoc = () => {
     };
 
     function getPriceOfUpgrade(type) {
+        if (!playerData[type]) playerData[type] = 0;
         switch (type) {
             case "multiplier":
-                return 500 * playerData.multiplier;
+                return 250 * playerData.multiplier;
+            case "saltines":
+                return 10000 * playerData.saltines || 500;
         };
     };
 
@@ -45,9 +62,11 @@ document.atoc = () => {
     };
 
     function upgrade(type) {
-        if (playerData[type]) {
+        if (playerData[type] || playerData[type] == 0) {
             let price = getPriceOfUpgrade(type);
             if (playerData.crackers >= price) {
+                upgradeSoundPlayer.currentTime = 0;
+                upgradeSoundPlayer.play();
                 playerData.crackers -= price;
                 playerData[type] += 1;
             } else {
@@ -120,19 +139,27 @@ document.atoc = () => {
         };
     });
 
+    upgradeNames.forEach((n) => {
+        let elem = document.getElementById(`${n}Count`).parentNode.querySelector("a");
+        elem.addEventListener("click", () => {
+            upgrade(n);
+        });
+    });
+
     // events
     document.atoc = () => { alert("Yeah, it's not gonna work.") };
     crackersLabel.addEventListener("mouseenter", () => { showExactAmount = true; });
     crackersLabel.addEventListener("mouseleave", () => { showExactAmount = false; });
     setInterval(() => { saveProgress(); }, 10000);
-    setInterval(() => { crackersPerSecond = 0; }, 1000);
+    setInterval(() => { crackersPerSecond = 0; for (let i = 0; i < playerData.saltines; i++) { clickCracker(); }; }, 1000);
     setInterval(() => {
         crackersLabel.textContent = `${showExactAmount ? playerData.crackers : abbreviateNumber(playerData.crackers)} crackers`;
         clickButton.style.rotate = `${Number(clickButton.style.rotate.replace("deg", "")) + 1}deg`;
         cpsLabel.textContent = `${crackersPerSecond}`;
-        document.getElementById("timePlayed").textContent =  `${abbreviateNumber(Math.floor(playerData.gameStarted - Date.now() / 1000) * -1)} seconds`;
+        // document.getElementById("timePlayed").textContent =  `${abbreviateNumber(Math.floor(playerData.gameStarted - Date.now() / 1000) * -1)} seconds`;
         // document.getElementById("exactAmount").textContent =  `${playerData.crackers}`;
-        ["multiplier"].forEach((n) => {
+        console.log(getPriceOfUpgrade("saltines"));
+        upgradeNames.forEach((n) => {
             let elem = document.getElementById(`${n}Count`);
             elem.textContent = playerData[n];
 
