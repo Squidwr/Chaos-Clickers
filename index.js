@@ -151,7 +151,7 @@ document.atoc = () => {
     crackersLabel.addEventListener("mouseenter", () => { showExactAmount = true; });
     crackersLabel.addEventListener("mouseleave", () => { showExactAmount = false; });
     setInterval(() => { saveProgress(); }, 10000);
-    setInterval(() => { crackersPerSecond = 0; for (let i = 0; i < playerData.saltines; i++) { clickCracker(); }; }, 1000);
+    setInterval(() => { crackersPerSecond = 0; for (let i = 0; i < playerData.saltines; i++) { clickCracker(); clickSoundPlayer.play(); }; }, 1000);
     setInterval(() => {
         crackersLabel.textContent = `${showExactAmount ? playerData.crackers : abbreviateNumber(playerData.crackers)} crackers`;
         clickButton.style.rotate = `${Number(clickButton.style.rotate.replace("deg", "")) + 1}deg`;
