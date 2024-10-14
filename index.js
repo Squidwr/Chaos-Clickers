@@ -122,7 +122,8 @@ restoreButton.addEventListener("click", () => {
 // events
 crackersLabel.addEventListener("mouseenter", () => { showExactAmount = true; });
 crackersLabel.addEventListener("mouseleave", () => { showExactAmount = false; });
-setInterval(() => { crackersPerSecond = 0; saveProgress(); }, 10000);
+setInterval(() => { saveProgress(); }, 10000);
+setInterval(() => { crackersPerSecond = 0; }, 1000);
 setInterval(() => {
     crackersLabel.textContent = `${showExactAmount ? playerData.crackers : abbreviateNumber(playerData.crackers)} crackers`;
     clickButton.style.rotate = `${Number(clickButton.style.rotate.replace("deg", "")) + 1}deg`;
