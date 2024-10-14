@@ -15,16 +15,46 @@ body {
     margin-left: -8px;
     height: 100%;
     width: 30%;
-    background-color: rgb(20, 106, 182);
+    background-color: #146ab6;
+    border-right: 15px solid #104d83;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    resize: horizontal;
+}
+
+#upgrades {
+    background-color: #282828;
+    color: white;
+    width: 100%;
+    margin-top: -25px;
+    margin-right: -8px;
+    padding-top: 10px;
+    padding-left: 20px;
+    overflow-y: auto;
+}
+
+#upgrades h1 {
+    font-size: 50px;
+}
+
+#upgrades a {
+    color: rgb(0, 191, 255);
+}
+#upgrades a:active {
+    color: rgb(0, 140, 187);
 }
 
 #amount {
+    text-align: center;
     font-size: 50px;
     margin: 0;
     color: white;
+    transition: all 0.5s ease;
+}
+
+#amount:hover {
+    font-size: 55px;
 }
 
 #cracker {
@@ -33,21 +63,25 @@ body {
     transition: all 0.2s ease;
 }
 
+#cracker:hover {
+    width: 65%;
+}
+
 #cracker:active {
     width: 75%;
 }
 
-#toggleMute {
-    width: 40px;
-    height: 40px;
-}
-
-#resetGame {
-    width: 40px;
-    height: 40px;
-}
-
 #quickActions {
     position: fixed;
+    width: 30%;
+}
 
+#quickActions img {
+    width: 40px;
+    height: 40px;
+    transition: all 0.1s ease-out;
+}
+#quickActions img:hover {
+    width: 45px;
+    height: 45px;
 }
