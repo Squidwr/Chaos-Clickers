@@ -1,0 +1,53 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+body {
+    height: 110vh;
+    display: flex;
+    justify-content: last baseline;
+}
+
+#clickingMenu {
+    display: flex;
+    margin-top: -16px;
+    margin-left: -8px;
+    height: 100%;
+    width: 30%;
+    background-color: rgb(20, 106, 182);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#amount {
+    font-size: 50px;
+    margin: 0;
+    color: white;
+}
+
+#cracker {
+    width: 60%;
+    height: auto;
+    transition: all 0.2s ease;
+}
+
+#cracker:active {
+    width: 75%;
+}
+
+#toggleMute {
+    width: 40px;
+    height: 40px;
+}
+
+#resetGame {
+    width: 40px;
+    height: 40px;
+}
+
+#quickActions {
+    position: fixed;
+
+}
