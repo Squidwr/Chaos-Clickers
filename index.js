@@ -36,8 +36,8 @@ document.atoc = () => {
     };
 
     function loadProgress() {
-        if (localStorage.getItem("playerData") == undefined) localStorage.setItem("playerData", atob(JSON.stringify(playerData)));
-        playerData = JSON.parse(atob(localStorage.getItem("playerData")));
+        playerData = JSON.parse(atob(localStorage.getItem("playerData"))) || playerData;
+        console.log()
         if (playerData.musicMuted) muteButton.click();
     };
 
@@ -146,19 +146,26 @@ document.atoc = () => {
         });
     });
 
+    setInterval(() => {
+        for (let i = 0; i < playerData.saltines; i++) {
+            setTimeout(() => {
+                clickCracker();
+            }, 1000 / (i || 10));
+        };
+    }, 1000);
+
     // events
     document.atoc = () => { alert("Yeah, it's not gonna work.") };
     crackersLabel.addEventListener("mouseenter", () => { showExactAmount = true; });
     crackersLabel.addEventListener("mouseleave", () => { showExactAmount = false; });
     setInterval(() => { saveProgress(); }, 10000);
-    setInterval(() => { crackersPerSecond = 0; for (let i = 0; i < playerData.saltines; i++) { clickCracker(); clickSoundPlayer.play(); }; }, 1000);
+    setInterval(() => { crackersPerSecond = 0; }, 1000);
     setInterval(() => {
         crackersLabel.textContent = `${showExactAmount ? playerData.crackers : abbreviateNumber(playerData.crackers)} crackers`;
         clickButton.style.rotate = `${Number(clickButton.style.rotate.replace("deg", "")) + 1}deg`;
         cpsLabel.textContent = `${crackersPerSecond}`;
         // document.getElementById("timePlayed").textContent =  `${abbreviateNumber(Math.floor(playerData.gameStarted - Date.now() / 1000) * -1)} seconds`;
         // document.getElementById("exactAmount").textContent =  `${playerData.crackers}`;
-        console.log(getPriceOfUpgrade("saltines"));
         upgradeNames.forEach((n) => {
             let elem = document.getElementById(`${n}Count`);
             elem.textContent = playerData[n];
