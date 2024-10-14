@@ -51,7 +51,7 @@ document.atoc = () => {
             case "multiplier":
                 return 250 * playerData.multiplier;
             case "saltines":
-                return 10000 * playerData.saltines || 500;
+                return 4000 * playerData.saltines || 500;
         };
     };
 
